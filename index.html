@@ -1,0 +1,135 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <!-- Primary Meta Tags -->
+<title>DBChart</title>
+<meta name="title" content="DBChart">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+<link href='assets/css/styles.css' rel='stylesheet' type='text/css'>
+<link href='assets/css/flowy.css' rel='stylesheet' type='text/css'>
+<link href="assets/css/jquery.contextMenu.css" rel="stylesheet" type="text/css">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src='assets/js/dragula.js'></script>
+<script src="assets/js/plain-draggable.min.js"></script>
+<script src="assets/js/jquery.contextMenu.js"></script>
+<script src="assets/js/jquery.ui.position.js"></script>
+</head>
+<body>
+    <div id="navigation">
+        <div id="leftside">
+            <div id="details">
+            <div id="back"><img src="assets/img/icons/arrow.svg"></div>
+            <div id="names">
+                <p id="title">Database Tool</p>
+                <p id="subtitle">Diagram creator</p>
+            </div>
+        </div>            
+        </div>
+        <div id="centerswitch">
+            <div id="leftswitch">Diagram view</div>
+            <div id="rightswitch">Code editor</div>
+        </div>
+        <div id="buttonsright">
+            <div id="discard">Discard</div>
+            <div id="publish">Export Diagram</div>
+        </div>
+    </div>
+    <div id="leftcard">
+        <p id="header">Blocks</p>
+        <div id="search">
+            <img src="assets/img/icons/search.svg">
+            <input type="text" placeholder="Search blocks">
+        </div>
+        <div id="subnav">
+            <div id="triggers" class="navactive side">Database</div>
+            <div class="divider"></div>
+        </div>
+        <div id="blocklist">
+          <div id="element_1">
+            <div class="blockelem create-flowy noselect">
+                <input type="hidden" name='blockelemtype' class="blockelemtype" value="1">
+                <div class="grabme">
+                    <img src="assets/img/icons/grabme.svg">
+                </div>
+                <div class="blockin">
+                    <div class="blockico">
+                        <span></span>
+                        <img src="assets/img/icons/table.svg">
+                    </div>
+                    <div class="blocktext">
+                        <p class="blocktitle">New table</p>
+                        <p class="blockdesc">Adds an empty table to the diagram</p>
+                    </div>
+                </div>
+            </div>
+          </div>
+            <div class="blockelem create-flowy noselect">
+                <input type="hidden" name='blockelemtype' class="blockelemtype" value="2">
+                <div class="grabme">
+                    <img src="assets/img/icons/grabme.svg">
+                </div>
+                <div class="blockin">
+                    <div class="blockico">
+                        <span></span>
+                        <img src="assets/img/icons/view.svg">
+                    </div>
+                    <div class="blocktext">
+                        <p class="blocktitle">New view</p>
+                        <p class="blockdesc">Adds a new view</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <a href="https://github.com/xtokio/dbchart/" target="_blank">GitHub</a>
+            <span>·</span>
+            <a href="https://twitter.com/xtokio" target="_blank">Twitter</a>
+            <span>·</span>
+                <a href="https://mischicanadas.com" target="_blank"><p>Made with</p><img src="assets/img/icons/heart.svg"><p>by</p> Luis Gomez</a>
+        </div>
+    </div>
+
+    <div id="propwrap">
+        <div id="properties">
+            <div id="close">
+                <img src="assets/img/icons/close.svg">
+            </div>
+            <p id="header2">Properties</p>
+            <div id="propswitch">
+                <div id="dataprop">Data</div>
+                <div id="alertprop">Alerts</div>
+                <div id="logsprop">Logs</div>
+            </div>
+            <div id="proplist">
+                <p class="inputlabel">Select database</p>
+                <div class="dropme">Database 1 <img src="assets/img/icons/dropdown.svg"></div>
+                <p class="inputlabel">Check properties</p>
+                <div class="dropme">All<img src="assets/img/icons/dropdown.svg"></div>
+                <div class="checkus"><img src="assets/img/icons/checkon.svg"><p>Log on successful performance</p></div>
+                <div class="checkus"><img src="assets/img/icons/checkoff.svg"><p>Give priority to this block</p></div>
+            </div>
+            <div id="divisionthing"></div>
+            <div id="removeblock">Delete blocks</div>
+        </div>
+    </div>
+
+    <div id="canvas">
+    </div>
+</body>
+<script>
+  dragula([document.getElementById("element_1"), document.getElementById("canvas")], {
+    copy: true
+  }).on('drop', function (el) {
+    let current_children = $("#canvas").children().length + 1;
+    el.id = current_children;
+    $(`#${current_children}`).css("background-color","white");
+    let draggable = new PlainDraggable(document.getElementById(current_children),
+                          {handle: $(`#${current_children} .grabme`)[0]});
+    
+    console.log("Dropped");
+  });
+</script>
+</html>
