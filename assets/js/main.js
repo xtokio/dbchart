@@ -32,7 +32,7 @@ $(document).ready(function(){
     canvas_consecutive++;
     let current_id = "db_element_table_"+canvas_consecutive;
     let element_clone = `
-      <div id="${current_id}" class="blockelem create-flowy noselect" style="background-color: white;">
+      <div id="${current_id}" class="canvas_blockelem blockelem create-flowy noselect" style="background-color: white;">
         <input type="hidden" name='blockelemtype' class="blockelemtype" value="1">
         <div class="grabme">
           <img src="assets/img/icons/grabme.svg">
@@ -108,7 +108,7 @@ $(document).ready(function(){
     let canvas_clone  = document.getElementById("canvas").cloneNode(true);    
     $("#canvas").remove();
     $("body").append(canvas_clone);
-    
+
     canvas_objects_ids.forEach(function(current_id){
       let draggable = new PlainDraggable(document.getElementById(current_id),{handle: document.querySelector(`#${current_id} .grabme`)});
       canvas_objects_draggable.set(current_id,draggable);
