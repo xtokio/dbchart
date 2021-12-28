@@ -12,6 +12,23 @@ $(document).ready(function(){
   }).on('drop', function (el) {
     this.remove();
 
+    add_element_to_canvas("New table","table.svg");
+    refresh_canvas();    
+  });
+
+  // New View
+  dragula([document.getElementById("db_element_view"), document.getElementById("canvas")], {
+    copy: true
+  }).on('drop', function (el) {
+    this.remove();
+
+    add_element_to_canvas("New view","view.svg");
+    refresh_canvas(); 
+
+  });
+
+  function add_element_to_canvas(element_name,element_icon)
+  {
     canvas_consecutive++;
     let current_id = "db_element_table_"+canvas_consecutive;
     canvas_objects_ids.push(current_id);
@@ -25,12 +42,10 @@ $(document).ready(function(){
         <div class="blockin">
           <div class="blockico">
             <span></span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16" style="position: relative; top: 3px; left: -3px;">
-              <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
-            </svg>
+            <img src="assets/img/icons/${element_icon}"/>
           </div>
           <div class="blocktext">
-            <p class="blocktitle" contenteditable="true">Users</p>
+            <p class="blocktitle" contenteditable="true">${element_name}</p>
             <p class="blockdesc" contenteditable="true">Table description</p>
           </div>
           <br>
@@ -78,7 +93,10 @@ $(document).ready(function(){
     {
       $("#canvas").append(element_clone);
     }
+  }
 
+  function refresh_canvas()
+  {
     canvas_objects_ids.forEach(function(current_id){
       let draggable = new PlainDraggable(document.getElementById(current_id),{handle: document.querySelector(`#${current_id} .grabme`)});
       canvas_objects_draggable.set(current_id,draggable);
@@ -148,62 +166,7 @@ $(document).ready(function(){
         </li>
       `);
     });
-    
-  });
 
-  // New View
-  dragula([document.getElementById("db_element_view"), document.getElementById("canvas")], {
-    copy: true
-  }).on('drop', function (el) {
-    this.remove();
-
-    canvas_consecutive++;
-    let current_id = "db_element_view_"+canvas_consecutive;
-    canvas_objects_ids.push(current_id);
-
-    
-    let element_clone = `
-      <div id="${current_id}" class="blockelem create-flowy noselect" style="background-color: white;">
-        <input type="hidden" name='blockelemtype' class="blockelemtype" value="1">
-        <div class="grabme">
-          <img src="assets/img/icons/grabme.svg">
-        </div>
-        <div class="blockin">
-          <div class="blockico">
-            <span></span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-border-outer" viewBox="0 0 16 16" style="position: relative; top: 3px; left: -3px;">
-              <path d="M7.5 1.906v.938h1v-.938h-1zm0 1.875v.938h1V3.78h-1zm0 1.875v.938h1v-.938h-1zM1.906 8.5h.938v-1h-.938v1zm1.875 0h.938v-1H3.78v1zm1.875 0h.938v-1h-.938v1zm2.813 0v-.031H8.5V7.53h-.031V7.5H7.53v.031H7.5v.938h.031V8.5h.938zm.937 0h.938v-1h-.938v1zm1.875 0h.938v-1h-.938v1zm1.875 0h.938v-1h-.938v1zM7.5 9.406v.938h1v-.938h-1zm0 1.875v.938h1v-.938h-1zm0 1.875v.938h1v-.938h-1z"/>
-              <path d="M0 0v16h16V0H0zm1 1h14v14H1V1z"/>
-            </svg>
-          </div>
-          <div class="blocktext">
-            <p class="blocktitle" contenteditable="true">New View</p>
-            <p class="blockdesc">Adds an empty view</p>
-          </div>
-        </div>
-
-        <div>
-          <ul class="menu-list"></ul>
-          <ul class="menu-list"></ul>
-        </div>
-      </div>
-    `;
-
-    let canvas_clone  = document.getElementById("canvas").cloneNode(true);
-    
-    $("#canvas").remove();
-
-    $("body").append(canvas_clone);
-    
-    if($(`#${current_id}`).length == 0)
-    {
-      $("#canvas").append(element_clone);
-    }
-
-    canvas_objects_ids.forEach(function(item){
-      new PlainDraggable(document.getElementById(item),{handle: document.querySelector(`#${item} .grabme`)});
-    });
-
-  });
+  }
   
 });
