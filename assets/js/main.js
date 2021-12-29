@@ -118,7 +118,7 @@ $(document).ready(function(){
     {
       let temp_lines = [];
       canvas_objects_lines.forEach(function(current_line){
-        let line = new LeaderLine(document.getElementById(current_line.start.id), document.getElementById(current_line.end.id));
+        let line = new LeaderLine(document.getElementById(current_line.start.id), document.getElementById(current_line.end.id),{color: 'rgba(30, 130, 250, 0.9)'});
         temp_lines.push(line);
         current_line.remove();
       });
@@ -149,7 +149,7 @@ $(document).ready(function(){
       }
       else
       {
-        let line = new LeaderLine(fields_connect[0], $(`#${current_id}`)[0]);
+        let line = new LeaderLine(fields_connect[0], $(`#${current_id}`)[0],{color: 'rgba(30, 130, 250, 0.9)'});
         canvas_objects_lines.push(line);
 
         canvas_objects_draggable.get(fields_connect[0].id).onMove = function() { 
@@ -205,5 +205,14 @@ $(document).ready(function(){
     });
 
   }
+
+  // Export diagram to png
+  $("#publish").on("click",function(e){
+    html2canvas(document.getElementById("canvas")).then(function (canvas) {			
+      canvas.toBlob(function(blob) {
+        saveAs(blob, "diagram_01.png");
+      });
+    });
+  });
   
 });
