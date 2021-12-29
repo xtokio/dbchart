@@ -373,6 +373,15 @@ body, html {
     font-size: 14px;
     line-height: 21px;
 }
+.blockclose {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
+.blockclose svg:hover {
+  fill: red;
+  cursor: pointer;
+}
 .blockdisabled {
     background-color: #F0F2F9;
     opacity: .5;

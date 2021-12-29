@@ -56,6 +56,11 @@ $(document).ready(function(){
           <div class="blocktext">
             <p class="blocktitle" contenteditable="true">${element_name}</p>
             <p class="blockdesc" contenteditable="true">Description</p>
+            <div class="blockclose">
+              <svg data-id="${current_id}" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+              </svg>
+            </div>
           </div>
           <br>
         </div>
@@ -213,6 +218,35 @@ $(document).ready(function(){
           </button>
         </li>
       `);
+    });
+
+    // Remove element from canvas
+    $(".blockclose svg").on("click",function(){
+      let current_id = $(this).attr("data-id");
+      let remove_ids = [];
+
+      canvas_objects_lines.forEach(function(value,index){
+        if(value.start.id == current_id || value.end.id == current_id)
+        {
+          value.remove();
+          remove_ids.push(index);
+        }
+      });
+      remove_ids.reverse();
+      remove_ids.forEach(function(item){
+        canvas_objects_lines.splice(item, 1);
+      });
+      
+      let remove_id = 0;
+      canvas_objects_ids.forEach(function(value,index){
+        if(current_id == value)
+          remove_id = index;
+      });
+      canvas_objects_ids.splice(remove_id, 1);
+      canvas_objects_draggable.delete(current_id);
+
+      $(`#${current_id}`).remove();
+
     });
 
   }
