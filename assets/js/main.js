@@ -27,6 +27,17 @@ $(document).ready(function(){
 
   });
 
+  // New Process
+  dragula([document.getElementById("db_element_process"), document.getElementById("canvas")], {
+    copy: true
+  }).on('drop', function (el) {
+    this.remove();
+
+    add_element_to_canvas("New process","process.svg");
+    refresh_canvas(); 
+
+  });
+
   function add_element_to_canvas(element_name,element_icon)
   {
     canvas_consecutive++;
@@ -44,7 +55,7 @@ $(document).ready(function(){
           </div>
           <div class="blocktext">
             <p class="blocktitle" contenteditable="true">${element_name}</p>
-            <p class="blockdesc" contenteditable="true">Table description</p>
+            <p class="blockdesc" contenteditable="true">Description</p>
           </div>
           <br>
         </div>
