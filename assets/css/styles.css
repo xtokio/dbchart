@@ -287,7 +287,7 @@ body, html {
 }
 .blockelem {
     padding-top: 10px;
-    width: 318px;
+    width: 260px;
     border: 1px solid transparent;
     transition-property: box-shadow, height;
     transition-duration: .2s;
@@ -354,7 +354,7 @@ body, html {
 }
 .blocktext {
     display: inline-block;
-    width: 220px;
+    width: 140px;
     vertical-align: top;
     margin-left: 12px
 }

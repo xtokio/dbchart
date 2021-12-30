@@ -78,7 +78,7 @@ $(document).ready(function(){
                   </svg>
               
                   <span>Add column</span>
-                  <span>CTRL+A</span>
+                  <span></span>
                 </button>
               </li>
               <li class="menu-item">
@@ -89,7 +89,7 @@ $(document).ready(function(){
                   </svg>
               
                   <span><a href="#" data-id="${current_id}" class="connect" style="text-decoration: none;">Connect</a></span>
-                  <span>CTRL+E</span>
+                  <span></span>
                 </button>
               </li>
               <li class="menu-item">
@@ -99,7 +99,7 @@ $(document).ready(function(){
                   </svg>
               
                   <span><a href="#" data-id="${current_id}" class="disconnect" style="text-decoration: none;">Disconnect</a></span>
-                  <span>CTRL+E</span>
+                  <span></span>
                 </button>
               </li>
             </ul>
@@ -201,7 +201,7 @@ $(document).ready(function(){
       let canvas_clone  = document.getElementById("canvas").cloneNode(true);    
       $("#canvas").remove();
       $("body").append(canvas_clone);
-      
+
       refresh_canvas();
     });
 
