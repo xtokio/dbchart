@@ -1,8 +1,8 @@
 let canvas_objects_draggable = new Map();
 let canvas_objects_lines = [];
 let canvas_objects_ids = [];
-let canvas_consecutive = 0;
 let fields_connect = [];
+let canvas_consecutive = 0;
 
 $(document).ready(function(){
 
@@ -121,10 +121,6 @@ $(document).ready(function(){
 
   function refresh_canvas()
   {
-    let canvas_clone  = document.getElementById("canvas").cloneNode(true);    
-    $("#canvas").remove();
-    $("body").append(canvas_clone);
-
     canvas_objects_ids.forEach(function(current_id){
       let draggable = new PlainDraggable(document.getElementById(current_id),{handle: document.querySelector(`#${current_id} .grabme`)});
       canvas_objects_draggable.set(current_id,draggable);
@@ -201,6 +197,10 @@ $(document).ready(function(){
       remove_ids.forEach(function(item){
         canvas_objects_lines.splice(item, 1);
       });
+      
+      let canvas_clone  = document.getElementById("canvas").cloneNode(true);    
+      $("#canvas").remove();
+      $("body").append(canvas_clone);
       
       refresh_canvas();
     });
